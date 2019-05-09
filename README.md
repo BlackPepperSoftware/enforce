@@ -1,8 +1,8 @@
-= @blackpepper/enforce
+# @blackpepper/enforce
 
 Verify an npm environment is as expected.
 
-== Installation
+## Installation
 
 Setup via an npm `preinstall` script.
 
@@ -17,9 +17,9 @@ Setup via an npm `preinstall` script.
 }
 ```
 
-== Scripts
+## Scripts
 
-=== enforce-yarn
+### enforce-yarn
 
 Enforce, or prohibit, the use of `yarn` as a package manager.
 
@@ -27,11 +27,11 @@ Enforce, or prohibit, the use of `yarn` as a package manager.
 $ enforce-yarn [ --prohibit ]
 ```
 
-==== Arguments
+#### Arguments
 
 * `--prohibit` - specify to *prohibit* Yarn. Default is to *enforce*.
 
-=== enforce-registry
+### enforce-registry
 
 Enforce the use of a given registry.
 
@@ -39,6 +39,6 @@ Enforce the use of a given registry.
 $ enforce-registry --url http://my.com/registry/
 ```
 
-==== Arguments
+#### Arguments
 
 * `--url` - Required. The base URL of the registry to enforce.
