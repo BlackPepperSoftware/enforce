@@ -1,23 +1,17 @@
 #!/usr/bin/env node
 const chalk = require('chalk');
 
+console.error(chalk.yellow('Deprecated: use `enforce --registry URL` instead.'));
+
 const argv = require('yargs')
 	.usage('Usage: $0 [options]')
 	.describe('url', 'The required registry url')
 	.demandOption(['url'])
 	.argv;
 
-const actual = require('registry-url')();
+const err = require('./assert/assert-registry')(argv.url);
 
-const expected = argv.url;
-
-if (actual !== expected) {
-	console.error(
-		chalk.bold.red('Incorrect registry configured.\n') +
-		chalk.dim('Expected: ') + chalk.bold(expected) + '\n' +
-		chalk.dim('Actual: ') + chalk.bold(actual) + '\n' +
-		chalk.dim('To correct, use:\n') +
-		chalk.bold(`$ npm config set registry ${expected}\n`)
-	);
+if (err) {
+	console.error(`${err}\n`);
 	process.exit(1);
 }

@@ -1,6 +1,6 @@
 # @blackpepper/enforce
 
-Verify an npm environment is as expected.
+Verify an npm environment is as expected before install.
 
 ## Installation
 
@@ -11,34 +11,47 @@ Setup via an npm `preinstall` script.
 ```json
 {
   "scripts": {
-    "preinstall": "npm i --no-save --loglevel=error @blackpepper/enforce
-&& enforce-yarn && enforce-registry --url http://my.com/registry/"
+    "preinstall": "ENFORCE_VERSION=1.1.0; ENFORCE_DIR=\"$HOME/.npm/enforce/$ENFORCE_VERSION\"; 
+\"$ENFORCE_DIR/bin/enforce\" present || npm i -g --prefix=\"$ENFORCE_DIR\"
+@blackpepper/enforce@$ENFORCE_VERSION || exit 1; PATH=\"$ENFORCE_DIR/bin:$PATH\"; 
+enforce --npm --registry http://my.com/registry/"
   }
 }
 ```
 
-## Scripts
+## Options
 
-### enforce-yarn
+### `--npm`, `--no-npm`
+
+Enforce, or prohibit, the use of `npm` as a package manager.
+
+```
+$ enforce --npm
+$ enforce --no-npm
+```
+
+### `--yarn`, `--no-yarn`
 
 Enforce, or prohibit, the use of `yarn` as a package manager.
 
 ```
-$ enforce-yarn [ --prohibit ]
+$ enforce --yarn
+$ enforce --no-yarn
 ```
 
-#### Arguments
-
-* `--prohibit` - specify to *prohibit* Yarn. Default is to *enforce*.
-
-### enforce-registry
+### `--registry`
 
 Enforce the use of a given registry.
 
 ```
-$ enforce-registry --url http://my.com/registry/
+$ enforce --registry http://my.com/registry/
 ```
 
-#### Arguments
+### `present`
 
-* `--url` - Required. The base URL of the registry to enforce.
+Convenience command to verify `enforce` is installed. Just terminates normally with
+a zero exit code.
+
+```
+$ enforce present
+```

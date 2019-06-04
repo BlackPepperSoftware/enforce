@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const chalk = require('chalk');
 
+console.error(chalk.yellow('Deprecated: use `enforce --yarn` / `enforce --no-yarn` instead.'));
+
 const argv = require('yargs')
 	.usage('Usage: $0 [options]')
 	.boolean('prohibit')
@@ -8,15 +10,9 @@ const argv = require('yargs')
 	.describe('prohibit', 'Set to prohibit (rather than enforce) running with yarn')
 	.argv;
 
-const npmExecPath = process.env.npm_execpath;
+const err = require('./assert/assert-user-agent')('Yarn', /^Yarn\//, argv.prohibit);
 
-const found = !!npmExecPath && npmExecPath.indexOf('yarn') !== -1;
-
-if (argv.prohibit === found) {
-	console.error(
-		chalk.bold.red('Incorrect package manager used.\n') +
-		chalk.dim('Yarn expected: ') + chalk.bold(argv.prohibit ? 'NO' : 'YES') + '\n' +
-		chalk.dim('Actual npm exec path: ') + chalk.bold(npmExecPath) + '\n'
-	);
+if (err) {
+	console.error(`${err}\n`);
 	process.exit(1);
 }

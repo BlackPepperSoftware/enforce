@@ -1,11 +1,12 @@
 {
   "name": "@blackpepper/enforce",
   "description": "Verify an npm environment is as expected",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "author": "Ryan Pickett",
   "homepage": "https://github.com/BlackPepperSoftware/enforce",
   "bin": {
+    "enforce": "./enforce.js",
     "enforce-registry": "./enforce-registry.js",
     "enforce-yarn": "./enforce-yarn.js"
   },
