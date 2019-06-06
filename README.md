@@ -11,7 +11,7 @@ Setup via an npm `preinstall` script. For example:
 ```json
 {
   "scripts": {
-    "preinstall": "ENFORCE_VERSION=1.1.0; ENFORCE_DIR=\"$HOME/.npm/enforce/$ENFORCE_VERSION\"; 
+    "preinstall": "ENFORCE_VERSION=1.2.0; ENFORCE_DIR=\"$HOME/.npm/enforce/$ENFORCE_VERSION\"; 
 \"$ENFORCE_DIR/bin/enforce\" present || npm i -g --prefix=\"$ENFORCE_DIR\"
 @blackpepper/enforce@$ENFORCE_VERSION || exit 1; PATH=\"$ENFORCE_DIR/bin:$PATH\"; 
 enforce --npm --registry http://my.com/registry/"
