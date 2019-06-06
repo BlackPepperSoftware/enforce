@@ -4,7 +4,7 @@ Verify an npm environment is as expected before install.
 
 ## Installation
 
-Setup via an npm `preinstall` script.
+Setup via an npm `preinstall` script. For example:
 
 `package.json`:
 
@@ -19,23 +19,43 @@ enforce --npm --registry http://my.com/registry/"
 }
 ```
 
+You can reduce configuration, or use an organisation-wide `enforce` script, by pulling it down from a known location.
+
+`package.json`:
+ 
+```json
+{
+  "scripts": {
+    "preinstall": "curl -s http://my.com/enforce/config | bash"
+  }
+}
+```
+
 ## Options
 
-### `--npm`, `--no-npm`
+### `--npm [version]`
+### `--no-npm`
 
 Enforce, or prohibit, the use of `npm` as a package manager.
 
+In the `--npm` form, resolution of the optional `version` argument uses [semver](https://www.npmjs.com/package/semver). 
+
 ```
 $ enforce --npm
+$ enforce --npm ">=6.9.0"
 $ enforce --no-npm
 ```
 
-### `--yarn`, `--no-yarn`
+### `--yarn [version]`
+### `--no-yarn`
 
 Enforce, or prohibit, the use of `yarn` as a package manager.
 
+In the `--yarn` form, resolution of the optional `version` argument uses [semver](https://www.npmjs.com/package/semver).
+
 ```
 $ enforce --yarn
+$ enforce --yarn ">=1.12.3"
 $ enforce --no-yarn
 ```
 

@@ -11,20 +11,20 @@ exports.builder = {
     },
     npm: {
         description: 'Require npm',
-        type: 'boolean',
-        default: undefined,
+        type: 'string',
+        coerce: arg => arg === "" ? true : arg,
     },
     yarn: {
         description: 'Require Yarn',
-        type: 'boolean',
-        default: undefined,
+        type: 'string',
+        coerce: arg => arg === "" ? true : arg,
     },
 };
 
 const assertions = {
     registry: arg => require('../assert/assert-registry')(arg),
-    npm: arg => require('../assert/assert-user-agent')('npm', /^npm\//, !!arg),
-    yarn: arg => require('../assert/assert-user-agent')('Yarn', /^yarn\//, !!arg),
+    npm: arg => require('../assert/assert-user-agent')('npm', 'npm', arg),
+    yarn: arg => require('../assert/assert-user-agent')('Yarn', 'yarn', arg),
 };
 
 const validations = [
