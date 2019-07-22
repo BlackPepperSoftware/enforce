@@ -14,12 +14,16 @@
     "enforce-yarn": "./enforce-yarn.js"
   },
   "devDependencies": {
-    "ava": "^2.0.0"
+    "ava": "^2.2.0"
   },
   "dependencies": {
     "chalk": "^2.4.2",
     "registry-url": "^5.1.0",
     "semver": "^6.1.1",
     "yargs": "^13.2.2"
+  },
+  "resolutions": {
+    "lodash": "^4.17.15",
+    "lodash.merge": "^4.6.2"
   }
 }
